@@ -1,0 +1,16 @@
+{
+	"blocks": [
+		{
+			"type": "section",
+			"text": {
+				"type": "mrkdwn",
+				"text": "*Oops:bangbang: @{{ .User }}*\nIt seems like you do not have permission to initiate this operation! :no_entry:"
+			},
+			"accessory": {
+				"type": "image",
+				"image_url": "https://files.slack.com/files-pri/T02AYQYFS-F02BG3HQ60M/____________.png",
+				"alt_text": "Permission Denied"
+			}
+		}
+	]
+}

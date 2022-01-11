@@ -1,0 +1,26 @@
+{
+	"blocks": [
+		{
+			"type": "section",
+			"text": {
+				"type": "mrkdwn",
+				"text": "*Oops:bangbang: @{{ .User }} ! You are rejected to launch app rocket! :no_entry_sign:*"
+			}
+		},
+		{
+			"type": "divider"
+		},
+		{
+			"type": "section",
+			"text": {
+				"type": "mrkdwn",
+				"text": "*Rejected by:*\n:male-technologist::skin-tone-2: @{{ .Approvor }}\n\n*Status:*\n:no_entry_sign: Sadly Rejected"
+			},
+			"accessory": {
+				"type": "image",
+				"image_url": "https://files.slack.com/files-pri/T02AYQYFS-F02BG3HQ60M/____________.png",
+				"alt_text": "reject app rocket"
+			}
+		}
+	]
+}
