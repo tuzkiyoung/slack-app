@@ -19,11 +19,6 @@ func main() {
 	module.Conf.GetConf()
 	log.Logger = log.Output(zerolog.ConsoleWriter{Out: os.Stderr})
 
-	// err := godotenv.Load("./t3_slack.env")
-	// if err != nil {
-	// 	log.Fatal().Msg("Error loading .env file")
-	// }
-
 	// Instanciate deps
 	client, err := drivers.ConnectToSlackViaSocketmode(module.Conf.AppToken, module.Conf.BotToken)
 	if err != nil {
