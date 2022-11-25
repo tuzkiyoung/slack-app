@@ -1,0 +1,160 @@
+{
+  "type": "home",
+  "blocks": [
+    {
+      "type": "header",
+      "text": {
+        "type": "plain_text",
+        "text": "Hi~童鞋，欢迎来到XD，这里有各种心动基础服务",
+        "emoji": true
+      }
+    },
+    {
+      "type": "context",
+      "elements": [
+        {
+          "type": "mrkdwn",
+          "text": "Built with :sparkling_heart: by"
+        },
+        {
+          "type": "image",
+          "image_url": "https://emoji.slack-edge.com/T02AYQYFS/xindong/3b9571bac63b732b.png",
+          "alt_text": "xd"
+        },
+        {
+          "type": "mrkdwn",
+          "text": "*XD Infra Team*"
+        }
+      ]
+    },
+    {
+      "type": "divider"
+    },
+    {
+      "type": "section",
+      "text": {
+        "type": "mrkdwn",
+        "text": "*GitLab*\n服务类型: *Web*\n用途简介: *源代码托管*\n维护人: *XD Infra Team*"
+      },
+      "accessory": {
+        "type": "image",
+        "image_url": "https://about.gitlab.com/images/press/logo/jpg/gitlab-logo-500.jpg",
+        "alt_text": "gitlab"
+      }
+    },
+    {
+      "type": "actions",
+      "elements": [
+        {
+          "type": "button",
+          "text": {
+            "type": "plain_text",
+            "text": "带我去",
+            "emoji": true
+          },
+          "style": "primary",
+          "url": "https://git.xindong.com",
+          "value": "approve"
+        },
+        {
+          "type": "button",
+          "text": {
+            "type": "plain_text",
+            "text": "关于",
+            "emoji": true
+          },
+          "value": "git",
+          "action_id": "git"
+        }
+      ]
+    },
+    {
+      "type": "divider"
+    },
+    {
+      "type": "section",
+      "text": {
+        "type": "mrkdwn",
+        "text": "*NAS*\n服务类型: *NAS*\n用途简介: *公司共享网盘*\n维护人: *XD Infra Team*"
+      },
+      "accessory": {
+        "type": "image",
+        "image_url": "https://files.slack.com/files-pri/T02AYQYFS-F041ANF1W2C/nas-2.png",
+        "alt_text": "plane"
+      }
+    },
+    {
+      "type": "actions",
+      "elements": [
+        {
+          "type": "button",
+          "text": {
+            "type": "plain_text",
+            "text": "带我去",
+            "emoji": true
+          },
+          "style": "primary",
+          "url": "https://xindong.atlassian.net/l/cp/YubnPbfu",
+          "value": "approve"
+        },
+        {
+          "type": "button",
+          "text": {
+            "type": "plain_text",
+            "text": "关于",
+            "emoji": true
+          },
+          "value": "nas",
+          "action_id": "nas"
+        }
+      ]
+    },
+    {
+      "type": "divider"
+    },
+    {
+      "type": "section",
+      "text": {
+        "type": "mrkdwn",
+        "text": "持续施工中...:construction_worker:"
+      },
+      "accessory": {
+        "type": "image",
+        "image_url": "https://files.slack.com/files-pri/T02AYQYFS-F040Q2BE06Q/under-construction.png",
+        "alt_text": "cute cat"
+      }
+    },
+    {
+      "type": "divider"
+    },
+    {
+      "type": "header",
+      "text": {
+        "type": "plain_text",
+        "text": "心动IT&公共服务指南",
+        "emoji": true
+      }
+    },
+    {
+      "type": "divider"
+    },
+    {
+      "type": "section",
+      "text": {
+        "type": "mrkdwn",
+        "text": "更加详细的文档"
+      },
+      "accessory": {
+        "type": "button",
+        "text": {
+          "type": "plain_text",
+          "text": "我们走",
+          "emoji": true
+        },
+        "value": "xd_infra_docs",
+        "url": "https://xindong.atlassian.net/l/cp/1xtRJPYZ",
+        "action_id": "button-action"
+      }
+    }
+  ]
+}

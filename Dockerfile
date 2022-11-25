@@ -1,5 +1,5 @@
-FROM alpine
+FROM alpine:latest
 
-COPY slack-go-demo /app/shallowwater
+COPY slack /app/slack
 
-ENTRYPOINT [ "/app/shallowwater" ]
+ENTRYPOINT [ "/app/slack" ]

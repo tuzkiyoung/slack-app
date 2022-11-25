@@ -1,0 +1,103 @@
+{
+  "color": "#FF0000",
+  "blocks": [
+    {
+      "type": "section",
+      "text": {
+        "type": "mrkdwn",
+        "text": ":rotating_light:Triggered: {{.AlertId}} <https://google.com|alert link>"
+      }
+    },
+    {
+      "type": "divider"
+    },
+    {
+      "type": "section",
+      "fields": [
+        {
+          "type": "mrkdwn",
+          "text": "*:male-technologist::skin-tone-2: Assigned:*\t@{{.Assigned}}"
+        },
+        {
+          "type": "mrkdwn",
+          "text": "*:globe_with_meridians: Service:*\t{{.Service}}"
+        },
+        {
+          "type": "mrkdwn",
+          "text": "*:firecracker: Triggered by:*\t{{.Metric}}"
+        },
+        {
+          "type": "mrkdwn",
+          "text": "*:bar_chart: Value:*\t{{.Value}}"
+        },
+        {
+          "type": "mrkdwn",
+          "text": "*:fire_extinguisher: Priority:*\t{{.Priority}}"
+        }
+      ]
+    },
+    {
+      "type": "divider"
+    },
+    {
+      "type": "actions",
+      "elements": [
+        {
+          "type": "button",
+          "text": {
+            "type": "plain_text",
+            "text": "Acknowledge",
+            "emoji": true
+          },
+          "value": "ack",
+          "action_id": "act_ack"
+        },
+        {
+          "type": "button",
+          "text": {
+            "type": "plain_text",
+            "text": "Resolve",
+            "emoji": true
+          },
+          "value": "resolve",
+          "action_id": "act_resolve"
+        },
+        {
+          "type": "static_select",
+          "placeholder": {
+            "type": "plain_text",
+            "text": "More actions...",
+            "emoji": true
+          },
+          "options": [
+            {
+              "text": {
+                "type": "plain_text",
+                "text": "View Details",
+                "emoji": true
+              },
+              "value": "view_details"
+            },
+            {
+              "text": {
+                "type": "plain_text",
+                "text": "New Status Update",
+                "emoji": true
+              },
+              "value": "new_status_update"
+            },
+            {
+              "text": {
+                "type": "plain_text",
+                "text": "Change Priority",
+                "emoji": true
+              },
+              "value": "change_priority"
+            }
+          ],
+          "action_id": "static_select-action"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "type": "modal",
+  "close": {
+    "type": "plain_text",
+    "text": "关闭",
+    "emoji": true
+  },
+  "title": {
+    "type": "plain_text",
+    "text": "Gitlab",
+    "emoji": true
+  },
+  "blocks": [
+    {
+      "type": "header",
+      "text": {
+        "type": "plain_text",
+        "text": ":point_down: 这里有："
+      }
+    },
+    {
+      "type": "divider"
+    },
+    {
+      "type": "section",
+      "text": {
+        "type": "mrkdwn",
+        "text": "*Git*\n*访问方式:* https://git.xindong.com\n*用途说明:* xxxG以下的项目源代码托管"
+      }
+    },
+    {
+      "type": "divider"
+    },
+    {
+      "type": "section",
+      "text": {
+        "type": "mrkdwn",
+        "text": "*Git-Huge*\n*访问方式:* https://git-huge.xindong.com\n*用途说明:* xxxG以上的项目源代码托管"
+      }
+    }
+  ]
+}

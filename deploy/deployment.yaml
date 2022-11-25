@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: slack
+  namespace: dev
+  labels:
+    app: slack
+spec:
+  replicas: 1
+  template:
+    metadata:
+      name: slack
+      labels:
+        app: slack
+    spec:
+      containers:
+        - name: slack
+          image: registry.cn-shanghai.aliyuncs.com/xdcaravan/slack:1.0
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 443
+          resources:
+            requests:
+              cpu: 50m
+              memory: 60Mi
+            limits:
+              cpu: 200m
+              memory: 200Mi
+          volumeMounts:
+            - mountPath: /config
+              name: config
+      volumes:
+        - name: config
+          configMap:
+            name: slack
+            items:
+              - key: config.yaml
+                path: config.yaml
+      restartPolicy: Always
+      imagePullSecrets:
+        - name: xdcaravan
+  selector:
+    matchLabels:
+      app: slack

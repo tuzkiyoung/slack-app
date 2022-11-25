@@ -1,0 +1,32 @@
+{
+  "type": "modal",
+  "close": {
+    "type": "plain_text",
+    "text": "关闭",
+    "emoji": true
+  },
+  "title": {
+    "type": "plain_text",
+    "text": "NAS",
+    "emoji": true
+  },
+  "blocks": [
+    {
+      "type": "header",
+      "text": {
+        "type": "plain_text",
+        "text": ":point_down: 这里有："
+      }
+    },
+    {
+      "type": "divider"
+    },
+    {
+      "type": "section",
+      "text": {
+        "type": "mrkdwn",
+        "text": "*NAS*\n*访问方式*: *smb://nas.xindong.com*\n*用途说明:* 文件共享可以在公司内部简单快速地进行内容分享，文件共享具有简单的权限访问控制，个人目录完全私有，组目录允许同一部门内部访问，公共目录允许全公司内部访问。"
+      }
+    }
+  ]
+}

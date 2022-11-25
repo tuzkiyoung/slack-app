@@ -6,12 +6,12 @@ import (
 	"io/fs"
 )
 
-func renderTemplate(fs fs.FS, file string, args interface{}) bytes.Buffer {
+func renderTemplate(f fs.FS, file string, args interface{}) bytes.Buffer {
 
 	var tpl bytes.Buffer
 
 	// read the block-kit definition as a go template
-	t, err := template.ParseFS(fs, file)
+	t, err := template.ParseFS(f, file)
 	if err != nil {
 		panic(err)
 	}

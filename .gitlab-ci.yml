@@ -1,0 +1,106 @@
+services:
+  - name: docker:20.10.16-dind
+    command: [ "--registry-mirror","https://v5ci3jw0.mirror.aliyuncs.com" ]
+
+variables:
+  DOCKER_HOST: tcp://docker:2376
+  DOCKER_TLS_CERTDIR: "/certs"
+  DOCKER_TLS_VERIFY: 1
+  DOCKER_CERT_PATH: "$DOCKER_TLS_CERTDIR/client"
+  DOCKER_DRIVER: overlay2
+  SERVICE_NAME: slack
+
+stages:
+  - compile
+  - build
+  - deploy
+
+.go-cache:
+  variables:
+    GOPATH: $CI_PROJECT_DIR/.go
+  before_script:
+    - mkdir -p .go
+  cache:
+    paths:
+      - .go/pkg/mod/
+
+compile-slack:
+  stage: compile
+  image: golang:alpine
+  extends:
+    - .go-cache
+  variables:
+    GOPROXY: https://goproxy.cn,direct
+    CGO_ENABLED: 0
+  artifacts:
+    name: slack
+    paths:
+      - slack
+    expire_in: 7 days
+  before_script:
+    - mkdir -p $CI_PROJECT_DIR/.go
+  script:
+    - go build -ldflags "-w -s" -o slack
+    - chmod +x slack
+
+build-slack:
+  stage: build
+  image: docker:20.10.16
+  before_script:
+    - sleep 3
+    - mkdir -p binary && mv slack binary/ && cd binary
+    - echo "$DOCKER_REGISTRY_PASS" | docker login $DOCKER_REGISTRY --username $DOCKER_REGISTRY_USER --password-stdin
+  script:
+    - DOCKER_REGISTRY_IMAGE=$DOCKER_REGISTRY/$DOCKER_REGISTRY_NAMESPACE/$SERVICE_NAME
+    - docker pull $DOCKER_REGISTRY_IMAGE:latest || true
+    - docker build --cache-from $DOCKER_REGISTRY_IMAGE:latest --tag $DOCKER_REGISTRY_IMAGE:$CI_COMMIT_SHORT_SHA --tag $DOCKER_REGISTRY_IMAGE:latest --file $CI_PROJECT_DIR/Dockerfile .
+    - docker push $DOCKER_REGISTRY_IMAGE:$CI_COMMIT_SHORT_SHA
+    - docker push $DOCKER_REGISTRY_IMAGE:latest
+  needs:
+    - job: compile-slack
+
+.deploy-slack-template:
+  stage: deploy
+  image:
+    name: bitnami/kubectl:1.22.10
+    entrypoint: [ '' ]
+  dependencies: [ ]
+  environment:
+    name: dev
+    on_stop: stop-deploy-slack
+  needs:
+    - job: build-slack
+
+deploy-slack:
+  extends: .deploy-slack-template
+  script:
+    - sed -i "s/slack:1.0/slack:$CI_COMMIT_SHORT_SHA/g" $CI_PROJECT_DIR/deployment.yaml
+    - kubectl apply -f $CI_PROJECT_DIR/deployment.yaml
+  rules:
+    - changes:
+        paths:
+          - deploy/deployment.yaml
+
+update-slack:
+  extends: .deploy-slack-template
+  script:
+    - kubectl set image deployment/$SERVICE_NAME $SERVICE_NAME=$DOCKER_REGISTRY/$DOCKER_REGISTRY_NAMESPACE/$SERVICE_NAME:$CI_COMMIT_SHORT_SHA -n $CI_ENVIRONMENT_NAME
+  rules:
+    - changes:
+        paths:
+          - deploy/deployment.yaml
+      when: never
+    - when: on_success
+
+stop-deploy-slack:
+  stage: deploy
+  image:
+    name: bitnami/kubectl:1.22.10
+    entrypoint: ['']
+  script:
+    - kubectl delete deploy slack -n dev
+  dependencies: []
+  environment:
+    name: dev
+    action: stop
+  when: manual
